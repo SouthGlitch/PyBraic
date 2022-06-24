@@ -9,7 +9,7 @@ def isValidVectorValue(a) -> bool:
 
 def assertVectorValue(a):
     if (not isValidVectorValue(a)):
-        raise TypeError("A vector must be a list of numbers")
+        raise TypeError("Un vector debe tener cómo valor una lista de números decimales o enteros")
 
 
 def assertOperability(a: 'Vector', b: 'Vector'):
@@ -54,7 +54,7 @@ class Vector:
 
         return Vector(c)
 
-    def __mul__(A, B: 'Vector'):
+    def __matmul__(A, B: 'Vector'):
         assertOperability(A, B)
 
         res = 0
@@ -86,7 +86,7 @@ if(__name__ == "__main__"):
     c = b-a
     assert(c == Vector([1]*3))
 
-    c = b*a
+    c = b@a
     assert(c == 2*3)
 
     a = Vector([1, 2, 3])
@@ -98,10 +98,10 @@ if(__name__ == "__main__"):
     c = a-b
     assert(c == Vector([-3, -3.0, -3]))
 
-    c = a*b
+    c = a@b
     assert(c == (4 + 10.0 + 18))
 
     a = Vector([1, 2, .5])
     b = Vector([2, 3, 4])
-    c = a*b
+    c = a@b
     assert(c == (2+6+2))
