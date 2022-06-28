@@ -45,14 +45,17 @@ class Vector:
 
     def __sub__(A, B: 'Vector') -> 'Vector':
         assertOperability(A, B)
+        return A.__add__((-1)*B)
 
-        c = []
-        a, b = A.values, B.values
+    def __mul__(A, B: 'int | float'):
+        res = []
+        a = A.values
         for i in range(A.dimension):
-            c_i = a[i] - b[i]
-            c.append(c_i)
-
-        return Vector(c)
+            res.append(a[i]*B)
+        return Vector(res)
+    
+    def __rmul__(A, B: 'int | float'):
+        return A * B
 
     def __matmul__(A, B: 'Vector'):
         assertOperability(A, B)
@@ -105,3 +108,11 @@ if(__name__ == "__main__"):
     b = Vector([2, 3, 4])
     c = a@b
     assert(c == (2+6+2))
+
+    a = Vector([1,2,3])
+
+    b = a*2
+    assert(b == Vector([2,4,6])) 
+
+    b = 2*a
+    assert(b == Vector([2,4,6])) 
